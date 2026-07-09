@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fayçal — Video Editor</title>
+<meta name="description" content="Fayçal — video editor. Creative and administrative support: brainstorming, content creation, and short-form video edited in DaVinci Resolve.">
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Lateef:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script>/* set theme before first paint to avoid a flash */
+try{var t=localStorage.getItem("faycal-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Language gate: first visit asks for a language before anything else -->
+<div class="langgate" id="langGate">
+  <div class="langgate__inner">
+    <p class="langgate__rec mono"><span class="rec-dot"></span> SELECT LANGUAGE · اختر اللغة · CHOISIR LA LANGUE</p>
+    <div class="langgate__btns">
+      <button type="button" data-lang="en">English</button>
+      <button type="button" data-lang="ar" lang="ar" dir="rtl">العربية</button>
+      <button type="button" data-lang="fr">Français</button>
+    </div>
+  </div>
+</div>
+<script>/* returning visitors skip the gate */
+try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").remove();}catch(e){}</script>
+
+<!-- Playhead: scroll progress as an editing timeline -->
+<div class="playhead" aria-hidden="true">
+  <div class="playhead__bar" id="playheadBar"></div>
+  <div class="playhead__tc" id="playheadTc">00:00:00</div>
+</div>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="#hero"><img src="assets/wordmark.png" alt="FAYCAL"></a>
+  <div class="nav__links">
+    <a class="roll" data-split data-i18n="navAbout" href="#about">About</a>
+    <a class="roll" data-split data-i18n="navSkills" href="#skills">Skills</a>
+    <a class="roll" data-split data-i18n="navWork" href="#work">Work</a>
+    <a class="roll" data-split data-i18n="navContact" href="#contact">Contact</a>
+  </div>
+  <div class="nav__lang" id="langSwitch" role="group" aria-label="Language">
+    <button type="button" data-lang="en" class="is-active">EN</button>
+    <button type="button" data-lang="ar" lang="ar">ع</button>
+    <button type="button" data-lang="fr">FR</button>
+  </div>
+  <button class="nav__theme" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+  <a class="nav__cta" data-i18n="navCta" href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">My Drive ↗</a>
+</nav>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__rec mono"><span class="rec-dot"></span> REC <span id="heroTc">00:00:00</span></div>
+
+    <h1 class="hero__title">
+      <span class="mask"><span class="mask__inner" data-i18n="heroL1">VIDEO</span></span>
+      <span class="mask mask--2"><span class="mask__inner"><span data-i18n="heroL2">EDITOR</span><span class="hero__cam sticker" aria-hidden="true">🎥</span></span></span>
+    </h1>
+
+    <img class="hero__sticker hero__sticker--1 sticker" src="assets/logo-mark.png" alt="" aria-hidden="true">
+    <img class="hero__sticker hero__sticker--2 sticker" src="assets/logo-mark.png" alt="" aria-hidden="true">
+
+    <figure class="hero__portrait" id="heroPortrait">
+      <div class="flip">
+        <div class="flip__face flip__front">
+          <img src="assets/photo-900.jpg" alt="Portrait of Fayçal">
+        </div>
+        <div class="flip__face flip__back" aria-hidden="true">
+          <img class="flip__mark" src="assets/logo-mark.png" alt="">
+          <img class="flip__wordmark" src="assets/wordmark.png" alt="">
+          <p class="mono" data-i18n="flipRole">VIDEO EDITOR 🎥</p>
+        </div>
+      </div>
+    </figure>
+
+    <div class="hero__meta">
+      <p class="hero__copy">©2026</p>
+      <p class="hero__sub mono" data-i18n="heroSub">FAYÇAL — BORN NOVEMBER 1998</p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <p class="eyebrow mono reveal" data-tc data-i18n="eyeAbout">ABOUT</p>
+    <div class="about__grid">
+      <div class="about__left">
+        <h2 class="about__hello reveal" data-i18n="hello">Hello!</h2>
+        <p class="about__tag reveal" style="--i:1" data-i18n="aboutTag">I'm Fayçal —<br>Video Editor 🎥</p>
+      </div>
+      <div class="about__right">
+        <p class="reveal" style="--i:1" data-i18n="aboutP1">I'm a video editor born in November 1998, offering creative and administrative support — from brainstorming ideas and content creation to keeping every project organized and on schedule.</p>
+        <p class="reveal" style="--i:2" data-i18n="aboutP2">I cut everything in DaVinci Resolve, and all of my work lives in one open folder for you to browse.</p>
+        <div class="about__cta reveal" style="--i:3">
+          <a class="btn btn--dark" data-i18n="btnDrive" href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">My Google Drive ↗</a>
+          <a class="btn btn--ghost" data-i18n="btnShorts" href="#work">Watch my shorts ↓</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statement: scrubbed word by word, like footage under a playhead -->
+  <section class="statement" id="statement">
+    <p class="statement__text" id="statementText" data-i18n="statement">From brainstorming ideas to the final cut — I turn creative thinking into content that looks good, reads well, and stays organized.</p>
+  </section>
+
+  <!-- Skills -->
+  <section class="skills" id="skills">
+    <p class="eyebrow mono reveal" data-tc data-i18n="eyeSkills">SKILLS</p>
+    <h2 class="section-title"><span class="mask"><span class="mask__inner" data-i18n="skillsTitle">Skills</span></span></h2>
+    <ul class="skills__list">
+      <li class="skills__row reveal">
+        <h3 data-i18n="skillCreative">Creative</h3>
+        <p class="skills__tags" data-i18n="tagsCreative">Brainstorming ideas <i>•</i> Content creation (writing, editing) <i>•</i> Maintaining a visually appealing space</p>
+      </li>
+      <li class="skills__row reveal" style="--i:1">
+        <h3 data-i18n="skillAdmin">Administrative</h3>
+        <p class="skills__tags" data-i18n="tagsAdmin">Organization (scheduling, filing) <i>•</i> Communication (written &amp; verbal) <i>•</i> Office software (email, project management)</p>
+      </li>
+      <li class="skills__row reveal" style="--i:2">
+        <h3 data-i18n="skillTransfer">Transferable</h3>
+        <p class="skills__tags" data-i18n="tagsTransfer">Problem-solving <i>•</i> Time management <i>•</i> Interpersonal skills</p>
+      </li>
+      <li class="skills__row skills__row--tool reveal" style="--i:3">
+        <h3 data-i18n="skillTools">What I use</h3>
+        <p class="skills__tool"><img src="assets/davinci-360.png" alt="" width="34" height="34"> DaVinci Resolve</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="featured" id="featured">
+    <p class="eyebrow mono reveal" data-tc data-i18n="eyeFeatured">FEATURED PROJECTS</p>
+    <div class="work__head">
+      <h2 class="section-title"><span class="mask"><span class="mask__inner" data-i18n="featL1">Featured</span></span> <span class="mask mask--2"><span class="mask__inner" data-i18n="featL2">Projects</span></span></h2>
+    </div>
+    <article class="card card--wide reveal">
+      <div class="card__media card__media--wide" data-video="W2mQQQkFAvE">
+        <img src="assets/thumb-W2mQQQkFAvE.jpg" alt="Still from the Laysen Valley film" loading="lazy">
+        <button class="card__play mono" aria-label="Play Laysen Valley">▶ PLAY</button>
+      </div>
+      <div class="card__body card__body--wide">
+        <div>
+          <p class="card__kind mono" data-i18n="featKind">FILM · 16:9</p>
+          <h3>Laysen Valley — ليسن فالي</h3>
+        </div>
+        <p class="card__desc" data-i18n="featDesc">A full-length film shot and edited by Fayçal — best watched full-screen.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Work -->
+  <section class="work" id="work">
+    <p class="eyebrow mono reveal" data-tc data-i18n="eyeWork">SELECTED WORK</p>
+    <div class="work__head">
+      <h2 class="section-title"><span class="mask"><span class="mask__inner" data-i18n="workL1">Some of my</span></span> <span class="mask mask--2"><span class="mask__inner" data-i18n="workL2">projects</span></span></h2>
+      <a class="btn btn--ghost reveal" data-i18n="viewChannel" href="https://www.youtube.com/channel/UCsKF6fm_veNIZ4c--Bxx7MQ" target="_blank" rel="noopener">View channel ↗</a>
+    </div>
+
+    <div class="work__grid">
+      <article class="card reveal">
+        <div class="card__media" data-video="GwwzaHrRjnY">
+          <img src="assets/thumb-GwwzaHrRjnY.jpg" alt="Still from The Orange Helén" loading="lazy">
+          <button class="card__play mono" aria-label="Play The Orange Helén">▶ PLAY</button>
+        </div>
+        <div class="card__body">
+          <p class="card__kind mono" data-i18n="kind1">ART FILM · 9:16</p>
+          <h3>The Orange Helén</h3>
+          <p class="card__desc" data-i18n="desc1">A short-form video documenting the full making process of an original art piece called The Orange Helén.</p>
+        </div>
+      </article>
+
+      <article class="card reveal" style="--i:1">
+        <div class="card__media" data-video="sDhMBrF0-7k">
+          <img src="assets/thumb-sDhMBrF0-7k.jpg" alt="Still from the Starbucks promotional video" loading="lazy">
+          <button class="card__play mono" aria-label="Play Starbucks promo">▶ PLAY</button>
+        </div>
+        <div class="card__body">
+          <p class="card__kind mono" data-i18n="kind2">COMMERCIAL · 9:16</p>
+          <h3 data-i18n="title2">Starbucks Promo</h3>
+          <p class="card__desc" data-i18n="desc2">A full promotional video for a Starbucks branch, featuring a limited-time discount offer on their signature coffee cup.</p>
+        </div>
+      </article>
+
+      <article class="card reveal" style="--i:2">
+        <div class="card__media" data-video="kZ_LC0uxnMI">
+          <img src="assets/thumb-kZ_LC0uxnMI.jpg" alt="Still from the Match perfume video" loading="lazy">
+          <button class="card__play mono" aria-label="Play Match Perfume">▶ PLAY</button>
+        </div>
+        <div class="card__body">
+          <p class="card__kind mono" data-i18n="kind3">REVIEW · 9:16</p>
+          <h3 data-i18n="title3">Match Perfume</h3>
+          <p class="card__desc" data-i18n="desc3">Filmed the experience and presented everything on camera in a casual style, sharing an honest recommendation.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Contact / Footer -->
+  <footer class="footer" id="contact">
+    <p class="eyebrow mono eyebrow--light reveal" data-tc data-i18n="eyeContact">CONTACT</p>
+    <h2 class="footer__title">
+      <span class="mask"><span class="mask__inner" data-i18n="footL1">Let's</span></span>
+      <span class="mask mask--2"><span class="mask__inner" data-i18n="footL2">talk.</span></span>
+    </h2>
+    <p class="footer__sub reveal" data-i18n="footSub">Have a project in mind? Send a message, or browse everything in one place.</p>
+    <a class="footer__mail roll" data-split href="mailto:29Faycal@gmail.com">29Faycal@gmail.com</a>
+
+    <div class="footer__links reveal">
+      <a class="roll" data-split href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">Google Drive ↗</a>
+      <a class="roll" data-split href="https://www.youtube.com/channel/UCsKF6fm_veNIZ4c--Bxx7MQ" target="_blank" rel="noopener">YouTube ↗</a>
+    </div>
+
+    <div class="footer__bottom">
+      <img class="footer__wordmark" src="assets/wordmark.png" alt="FAYCAL">
+      <p class="mono" data-i18n="footBottom">© 2026 by FAYCAL — CUT ON DAVINCI RESOLVE</p>
+    </div>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
