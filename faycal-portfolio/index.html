@@ -29,8 +29,8 @@ try{var t=localStorage.getItem("faycal-theme")||(matchMedia("(prefers-color-sche
     </div>
   </div>
 </div>
-<script>/* returning visitors skip the gate */
-try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").remove();}catch(e){}</script>
+<script>/* resolve the initial language before the page renders */
+try{var __initialLang = null; var __q = new URLSearchParams(window.location.search).get("lang"); if(__q){__initialLang=__q;} else {try{var __saved = localStorage.getItem("faycal-lang"); if(__saved){__initialLang=__saved;}}catch(e){} if(!__initialLang){var __navLang=(navigator.language||navigator.userLanguage||"").toLowerCase(); __initialLang=__navLang.indexOf("ar")==0?"ar":__navLang.indexOf("fr")==0?"fr":"en";}} document.documentElement.setAttribute("data-initial-lang", __initialLang);}catch(e){}</script>
 
 <!-- Playhead: scroll progress as an editing timeline -->
 <div class="playhead" aria-hidden="true">

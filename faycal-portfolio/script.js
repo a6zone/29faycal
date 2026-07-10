@@ -103,6 +103,26 @@
     }
   };
 
+  const getPreferredLang = () => {
+    try {
+      const queryLang = new URLSearchParams(location.search).get("lang");
+      if (queryLang && I18N[queryLang]) return queryLang;
+    } catch {}
+
+    const attrLang = document.documentElement.getAttribute("data-initial-lang");
+    if (attrLang && I18N[attrLang]) return attrLang;
+
+    try {
+      const savedLang = localStorage.getItem("faycal-lang");
+      if (savedLang && I18N[savedLang]) return savedLang;
+    } catch {}
+
+    const navLang = (navigator.language || navigator.userLanguage || "").toLowerCase();
+    if (navLang.startsWith("ar")) return "ar";
+    if (navLang.startsWith("fr")) return "fr";
+    return "en";
+  };
+
   /* ---------- rolling letter links ---------- */
   // Arabic script is cursive: splitting letters breaks their joined forms,
   // so Arabic strings are set as plain text with no roll effect.
@@ -227,6 +247,7 @@
     const t = I18N[lang] || I18N.en;
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.setAttribute("data-lang", lang);
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const val = t[el.dataset.i18n];
@@ -273,10 +294,13 @@
   /* ---------- static rolls (email, brand links — same in all languages) ---------- */
   document.querySelectorAll("[data-split]:not([data-i18n])").forEach((el) => splitRoll(el, el.textContent));
 
-  let saved = null;
-  try { saved = localStorage.getItem("faycal-lang"); } catch (e) {}
-  // no saved language → the gate is up; render EN underneath without persisting
-  applyLang(saved && I18N[saved] ? saved : "en", Boolean(saved && I18N[saved]));
+  const initialLang = getPreferredLang();
+  applyLang(initialLang, true);
+  const gate = document.getElementById("langGate");
+  if (gate) {
+    gate.classList.add("is-done");
+    setTimeout(() => gate.remove(), 800);
+  }
 
   /* ---------- hero stickers: gentle mouse parallax ---------- */
   if (!reduceMotion) {
