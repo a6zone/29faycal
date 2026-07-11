@@ -8,13 +8,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="icon" type="image/png" href="assets/logo-mark.png?v=20260711d">
+<link rel="icon" type="image/png" href="assets/logo-mark.png?v=20260711e">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Lateef:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script>/* set theme before first paint to avoid a flash */
 try{var t=localStorage.getItem("faycal-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="stylesheet" href="style.css?v=20260711d">
+<link rel="stylesheet" href="style.css?v=20260711e">
 </head>
 <body>
 
@@ -148,90 +148,92 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
     </ul>
   </section>
 
-  <!-- Showreel: every project as a clip on one scrubbable timeline.
-       The section pins while vertical scroll slides the strip sideways;
-       the clip under the playhead lights up like selected footage. -->
-  <section class="reel" id="work">
-    <div class="reel__pin">
-      <div class="reel__head">
-        <div>
-          <p class="eyebrow mono" data-tc data-i18n="eyeReel">SHOWREEL</p>
-          <h2 class="section-title"><span class="mask"><span class="mask__inner" data-i18n="reelL1">The</span></span> <span class="mask mask--2"><span class="mask__inner" data-i18n="reelL2">showreel.</span></span></h2>
-        </div>
-        <a class="btn btn--ghost" data-i18n="viewChannel" href="https://www.youtube.com/channel/UCsKF6fm_veNIZ4c--Bxx7MQ" target="_blank" rel="noopener">View channel</a>
+  <!-- Projects: 3D flying cards. A cover-flow gallery driven by drag,
+       wheel, swipe, or arrow keys with spring physics; the centered
+       card opens into a full-screen player with sound. -->
+  <section class="fly" id="work">
+    <div class="fly__head">
+      <div>
+        <p class="eyebrow mono eyebrow--light" data-tc data-i18n="eyeReel">SHOWREEL</p>
+        <h2 class="section-title"><span class="mask"><span class="mask__inner" data-i18n="reelL1">The</span></span> <span class="mask mask--2"><span class="mask__inner" data-i18n="reelL2">showreel.</span></span></h2>
       </div>
+      <a class="btn fly__channel" data-i18n="viewChannel" href="https://www.youtube.com/channel/UCsKF6fm_veNIZ4c--Bxx7MQ" target="_blank" rel="noopener">View channel</a>
+    </div>
 
-      <div class="reel__track" id="reelTrack">
-        <article class="reel__card is-live">
-          <div class="card__media reel__media--wide" data-video="W2mQQQkFAvE">
+    <div class="fly__stage" id="flyStage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Projects">
+      <div class="fly__cam" id="flyCam">
+        <article class="fly__card" data-video="W2mQQQkFAvE" data-aspect="wide" style="--i:0">
+          <div class="fly__card-in">
             <img src="assets/thumb-W2mQQQkFAvE.jpg" alt="Still from the Laysen Valley film" loading="lazy">
-            <span class="reel__rec mono" aria-hidden="true"><span class="rec-dot"></span> REC</span>
-            <button class="card__play mono" aria-label="Play Laysen Valley">&#9654; PLAY</button>
-          </div>
-          <div class="reel__meta">
-            <p class="reel__num mono">01</p>
-            <div>
-              <p class="card__kind mono" data-i18n="featKind">FILM &#183; 16:9</p>
-              <h3>Laysen Valley &#183; &#1604;&#1610;&#1587;&#1606; &#1601;&#1575;&#1604;&#1610;</h3>
+            <div class="fly__glass">
+              <div class="fly__label">
+                <p class="mono fly__kind" data-i18n="featKind">FILM · 16:9</p>
+                <h3>Laysen Valley · ليسن فالي</h3>
+              </div>
+              <button class="fly__view" type="button" data-i18n="viewProject">View project</button>
             </div>
           </div>
-          <p class="reel__desc" data-i18n="featDesc">A full-length film shot and edited by Fay&#231;al, best watched full-screen.</p>
         </article>
 
-        <article class="reel__card">
-          <div class="card__media reel__media--tall" data-video="GwwzaHrRjnY">
-            <img src="assets/thumb-GwwzaHrRjnY.jpg" alt="Still from The Orange Hel&#233;n" loading="lazy">
-            <span class="reel__rec mono" aria-hidden="true"><span class="rec-dot"></span> REC</span>
-            <button class="card__play mono" aria-label="Play The Orange Hel&#233;n">&#9654; PLAY</button>
-          </div>
-          <div class="reel__meta">
-            <p class="reel__num mono">02</p>
-            <div>
-              <p class="card__kind mono" data-i18n="kind1">ART FILM &#183; 9:16</p>
-              <h3>The Orange Hel&#233;n</h3>
+        <article class="fly__card" data-video="GwwzaHrRjnY" data-aspect="tall" style="--i:1">
+          <div class="fly__card-in">
+            <img src="assets/thumb-GwwzaHrRjnY.jpg" alt="Still from The Orange Helén" loading="lazy">
+            <div class="fly__glass">
+              <div class="fly__label">
+                <p class="mono fly__kind" data-i18n="kind1">ART FILM · 9:16</p>
+                <h3>The Orange Helén</h3>
+              </div>
+              <button class="fly__view" type="button" data-i18n="viewProject">View project</button>
             </div>
           </div>
-          <p class="reel__desc" data-i18n="desc1">A short-form video documenting the full making process of an original art piece called The Orange Hel&#233;n.</p>
         </article>
 
-        <article class="reel__card">
-          <div class="card__media reel__media--tall" data-video="sDhMBrF0-7k">
+        <article class="fly__card" data-video="sDhMBrF0-7k" data-aspect="tall" style="--i:2">
+          <div class="fly__card-in">
             <img src="assets/thumb-sDhMBrF0-7k.jpg" alt="Still from the Starbucks promotional video" loading="lazy">
-            <span class="reel__rec mono" aria-hidden="true"><span class="rec-dot"></span> REC</span>
-            <button class="card__play mono" aria-label="Play Starbucks promo">&#9654; PLAY</button>
-          </div>
-          <div class="reel__meta">
-            <p class="reel__num mono">03</p>
-            <div>
-              <p class="card__kind mono" data-i18n="kind2">COMMERCIAL &#183; 9:16</p>
-              <h3 data-i18n="title2">Starbucks Promo</h3>
+            <div class="fly__glass">
+              <div class="fly__label">
+                <p class="mono fly__kind" data-i18n="kind2">COMMERCIAL · 9:16</p>
+                <h3 data-i18n="title2">Starbucks Promo</h3>
+              </div>
+              <button class="fly__view" type="button" data-i18n="viewProject">View project</button>
             </div>
           </div>
-          <p class="reel__desc" data-i18n="desc2">A full promotional video for a Starbucks branch, featuring a limited-time discount offer on their signature coffee cup.</p>
         </article>
 
-        <article class="reel__card">
-          <div class="card__media reel__media--tall" data-video="kZ_LC0uxnMI">
+        <article class="fly__card" data-video="kZ_LC0uxnMI" data-aspect="tall" style="--i:3">
+          <div class="fly__card-in">
             <img src="assets/thumb-kZ_LC0uxnMI.jpg" alt="Still from the Match perfume video" loading="lazy">
-            <span class="reel__rec mono" aria-hidden="true"><span class="rec-dot"></span> REC</span>
-            <button class="card__play mono" aria-label="Play Match Perfume">&#9654; PLAY</button>
-          </div>
-          <div class="reel__meta">
-            <p class="reel__num mono">04</p>
-            <div>
-              <p class="card__kind mono" data-i18n="kind3">REVIEW &#183; 9:16</p>
-              <h3 data-i18n="title3">Match Perfume</h3>
+            <div class="fly__glass">
+              <div class="fly__label">
+                <p class="mono fly__kind" data-i18n="kind3">REVIEW · 9:16</p>
+                <h3 data-i18n="title3">Match Perfume</h3>
+              </div>
+              <button class="fly__view" type="button" data-i18n="viewProject">View project</button>
             </div>
           </div>
-          <p class="reel__desc" data-i18n="desc3">Filmed the experience and presented everything on camera in a casual style, sharing an honest recommendation.</p>
         </article>
       </div>
+    </div>
 
-      <div class="reel__foot">
-        <p class="mono reel__count"><span id="reelIndex">01</span>&nbsp;/&nbsp;04</p>
-        <div class="reel__scrub" aria-hidden="true"><div class="reel__bar" id="reelBar"></div></div>
-        <p class="mono reel__hint" data-i18n="reelHint">SCROLL TO SCRUB</p>
+    <div class="fly__foot">
+      <div class="fly__descs">
+        <p class="fly__desc is-on" data-i18n="featDesc">A full-length film shot and edited by Fayçal, best watched full-screen.</p>
+        <p class="fly__desc" data-i18n="desc1">A short-form video documenting the full making process of an original art piece called The Orange Helén.</p>
+        <p class="fly__desc" data-i18n="desc2">A full promotional video for a Starbucks branch, featuring a limited-time discount offer on their signature coffee cup.</p>
+        <p class="fly__desc" data-i18n="desc3">Filmed the experience and presented everything on camera in a casual style, sharing an honest recommendation.</p>
       </div>
+      <p class="mono fly__count"><span id="flyIdx">01</span>&nbsp;/&nbsp;04</p>
+      <p class="mono fly__hint" data-i18n="reelHint">DRAG · SCROLL · ARROWS</p>
+    </div>
+
+    <div class="fly__modal" id="flyModal" hidden>
+      <div class="fly__backdrop" id="flyBackdrop"></div>
+      <figure class="fly__box" id="flyBox">
+        <img class="fly__poster" id="flyPoster" alt="">
+        <div class="fly__player" id="flyPlayer"></div>
+      </figure>
+      <button class="fly__close" id="flyClose" type="button" aria-label="Close">✕</button>
     </div>
   </section>
 
@@ -258,6 +260,6 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
 
 </main>
 
-<script src="script.js?v=20260711d"></script>
+<script src="script.js?v=20260711e"></script>
 </body>
 </html>

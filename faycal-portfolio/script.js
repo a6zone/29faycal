@@ -30,7 +30,7 @@
       tagsCreative: "Brainstorming ideas <i>•</i> Content creation (writing, editing) <i>•</i> Maintaining a visually appealing space",
       tagsAdmin: "Organization (scheduling, filing) <i>•</i> Communication (written &amp; verbal) <i>•</i> Office software (email, project management)",
       tagsTransfer: "Problem-solving <i>•</i> Time management <i>•</i> Interpersonal skills",
-      reelL1: "The", reelL2: "showreel.", reelHint: "SCROLL TO SCRUB", featKind: "FILM · 16:9",
+      reelL1: "The", reelL2: "showreel.", reelHint: "DRAG · SCROLL · ARROWS", viewProject: "View project", featKind: "FILM · 16:9",
       featDesc: "A full-length film shot and edited by Fayçal, best watched full-screen.",
       viewChannel: "View channel",
       kind1: "ART FILM · 9:16", kind2: "COMMERCIAL · 9:16", kind3: "REVIEW · 9:16",
@@ -58,7 +58,7 @@
       tagsCreative: "العصف الذهني <i>•</i> صناعة المحتوى (كتابة وتحرير) <i>•</i> الحفاظ على مساحة جذابة بصرياً",
       tagsAdmin: "التنظيم (جدولة وأرشفة) <i>•</i> التواصل (كتابي وشفهي) <i>•</i> برامج المكتب (البريد، إدارة المشاريع)",
       tagsTransfer: "حل المشكلات <i>•</i> إدارة الوقت <i>•</i> مهارات التواصل",
-      reelL1: "شريط", reelL2: "الأعمال", reelHint: "مرّر للتقديم", featKind: "فيلم · 16:9",
+      reelL1: "شريط", reelL2: "الأعمال", reelHint: "اسحب أو مرّر", viewProject: "شاهد المشروع", featKind: "فيلم · 16:9",
       featDesc: "فيلم كامل تصويرُ ومونتاجُ فيصل، يُشاهَد بملء الشاشة.",
       viewChannel: "قناتي",
       kind1: "فيلم فني · 9:16", kind2: "إعلان · 9:16", kind3: "مراجعة · 9:16",
@@ -86,7 +86,7 @@
       tagsCreative: "Brainstorming <i>•</i> Création de contenu (rédaction, édition) <i>•</i> Maintien d'un espace visuellement soigné",
       tagsAdmin: "Organisation (planning, classement) <i>•</i> Communication (écrite et orale) <i>•</i> Logiciels bureautiques (email, gestion de projet)",
       tagsTransfer: "Résolution de problèmes <i>•</i> Gestion du temps <i>•</i> Relationnel",
-      reelL1: "Bande", reelL2: "démo.", reelHint: "FAITES DÉFILER", featKind: "FILM · 16:9",
+      reelL1: "Bande", reelL2: "démo.", reelHint: "GLISSEZ · DÉFILEZ", viewProject: "Voir le projet", featKind: "FILM · 16:9",
       featDesc: "Un film complet tourné et monté par Fayçal, à regarder en plein écran.",
       viewChannel: "Voir la chaîne",
       kind1: "FILM D'ART · 9:16", kind2: "PUBLICITÉ · 9:16", kind3: "AVIS · 9:16",
@@ -180,21 +180,6 @@
   const flipEl = portrait?.querySelector(".flip");
   const statementSection = document.getElementById("statement");
 
-  /* ---------- showreel: scroll scrubs the clip strip sideways ---------- */
-  const reelEl = document.querySelector(".reel");
-  const reelTrack = document.getElementById("reelTrack");
-  const reelBar = document.getElementById("reelBar");
-  const reelIndex = document.getElementById("reelIndex");
-  const reelCards = reelTrack ? [...reelTrack.querySelectorAll(".reel__card")] : [];
-  let reelTop = 0, reelSpan = 1, reelMax = 0;
-  const measureReel = () => {
-    if (!reelEl || !reelTrack || reduceMotion) return;
-    reelTop = reelEl.getBoundingClientRect().top + scrollY;
-    reelSpan = Math.max(reelEl.offsetHeight - innerHeight, 1);
-    reelMax = Math.max(reelTrack.scrollWidth - reelTrack.parentElement.clientWidth, 0);
-  };
-  if (reelEl && reduceMotion) reelEl.classList.add("reel--static");
-
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;
@@ -228,22 +213,11 @@
           w.style.opacity = i < Math.floor(lit) ? 1 : i === Math.floor(lit) ? 0.13 + 0.87 * (lit - i) : 0.13;
         });
       }
-
-      // showreel scrub: section progress -> horizontal strip position
-      if (reelTrack && reelCards.length && !reduceMotion) {
-        const rp = Math.min(Math.max((scrollY - reelTop) / reelSpan, 0), 1);
-        const rtl = document.documentElement.dir === "rtl";
-        reelTrack.style.transform = `translateX(${(rtl ? 1 : -1) * rp * reelMax}px)`;
-        if (reelBar) reelBar.style.width = `${rp * 100}%`;
-        const live = Math.min(reelCards.length - 1, Math.round(rp * (reelCards.length - 1)));
-        reelCards.forEach((c, i) => c.classList.toggle("is-live", i === live));
-        if (reelIndex) reelIndex.textContent = String(live + 1).padStart(2, "0");
-      }
     });
   };
   addEventListener("scroll", onScroll, { passive: true });
-  addEventListener("resize", () => { stampSectionTimecodes(); measureReel(); onScroll(); });
-  addEventListener("load", () => { stampSectionTimecodes(); measureReel(); onScroll(); });
+  addEventListener("resize", () => { stampSectionTimecodes(); onScroll(); });
+  addEventListener("load", () => { stampSectionTimecodes(); onScroll(); });
 
   /* ---------- language switching ---------- */
   const langSwitch = document.getElementById("langSwitch");
@@ -263,7 +237,6 @@
 
     splitStatement(t.statement);
     stampSectionTimecodes();
-    measureReel();
     onScroll();
 
     langSwitch?.querySelectorAll("button").forEach((b) =>
@@ -350,22 +323,232 @@
     }, { passive: true });
   }
 
-  /* ---------- click-to-play videos ---------- */
-  document.querySelectorAll(".card__media").forEach((media) => {
-    const play = () => {
-      if (media.querySelector("iframe")) return;
-      const id = media.dataset.video;
-      const iframe = document.createElement("iframe");
-      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
-      iframe.allow = "autoplay; encrypted-media; picture-in-picture";
-      iframe.allowFullscreen = true;
-      iframe.title = media.querySelector("img")?.alt || "Video";
-      media.appendChild(iframe);
-      media.querySelector(".card__play")?.remove();
+  /* ---------- flying cards: cover-flow project gallery ----------
+     A continuous position `pos` (in card units) places every card on a
+     3D arc: translate3d + rotateY + scale, all GPU-composited. Drag,
+     wheel, swipe, and arrow keys write to the same spring that settles
+     on whole numbers so one card is always centered. */
+  const stage = document.getElementById("flyStage");
+  const flyCards = stage ? [...stage.querySelectorAll(".fly__card")] : [];
+  const flyDescs = [...document.querySelectorAll(".fly__desc")];
+  const flyIdx = document.getElementById("flyIdx");
+  const flyModal = document.getElementById("flyModal");
+  const flyBox = document.getElementById("flyBox");
+  const flyPoster = document.getElementById("flyPoster");
+  const flyPlayerHost = document.getElementById("flyPlayer");
+
+  if (stage && flyCards.length) {
+    const N = flyCards.length;
+    const rtl = () => document.documentElement.dir === "rtl";
+    let pos = 0, vel = 0, target = 0, raf = null, dragging = false;
+    let shownIdx = -1;
+
+    const spacing = () => flyCards[0].offsetWidth * 0.78;
+    const wrapIdx = (v) => ((Math.round(v) % N) + N) % N;
+
+    const render = () => {
+      const sp = spacing();
+      const dir = rtl() ? -1 : 1;
+      flyCards.forEach((card, i) => {
+        let o = i - pos;
+        o = ((o % N) + N) % N;
+        if (o > N / 2) o -= N;                      // nearest wrap: -N/2..N/2
+        const x = dir * o * sp;
+        const z = -Math.abs(o) * 190;
+        const ry = dir * Math.max(-1, Math.min(1, o)) * -26;
+        const sc = Math.max(0.7, 1 - Math.abs(o) * 0.13);
+        card.style.transform =
+          `translate(-50%, -50%) translate3d(${x}px, 0, ${z}px) rotateY(${ry}deg) scale(${sc})`;
+        card.style.opacity = String(Math.max(0, 1 - Math.max(0, Math.abs(o) - 1.1) * 0.75));
+        card.style.zIndex = String(100 - Math.round(Math.abs(o) * 10));
+        card.classList.toggle("is-center", Math.abs(o) < 0.5);
+      });
+      const idx = wrapIdx(pos);
+      if (idx !== shownIdx) {
+        shownIdx = idx;
+        if (flyIdx) flyIdx.textContent = String(idx + 1).padStart(2, "0");
+        flyDescs.forEach((d, i) => d.classList.toggle("is-on", i === idx));
+      }
     };
-    media.addEventListener("click", play);
-    media.querySelector(".card__play")?.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); }
+
+    const tick = () => {
+      if (dragging) { render(); raf = requestAnimationFrame(tick); return; }
+      const dist = target - pos;
+      vel += dist * 0.085;   // spring stiffness
+      vel *= 0.8;            // damping
+      pos += vel;
+      if (Math.abs(dist) < 0.001 && Math.abs(vel) < 0.001) {
+        pos = target;
+        render();
+        raf = null;
+        return;
+      }
+      render();
+      raf = requestAnimationFrame(tick);
+    };
+    const kick = () => {
+      if (reduceMotion) { pos = target; vel = 0; render(); return; }
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    const goTo = (t) => { target = t; kick(); };
+
+    /* drag: pointer events cover mouse, touch, and pen */
+    let startX = 0, startPos = 0, lastX = 0, lastT = 0, pxVel = 0, moved = false;
+    stage.addEventListener("pointerdown", (e) => {
+      if (e.button) return;
+      dragging = true; moved = false;
+      startX = lastX = e.clientX; startPos = pos;
+      lastT = performance.now(); pxVel = 0;
+      stage.setPointerCapture(e.pointerId);
+      stage.classList.add("is-drag");
+      kick();
     });
-  });
+    stage.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 6) moved = true;
+      pos = startPos + (rtl() ? 1 : -1) * dx / spacing();
+      const now = performance.now();
+      if (now > lastT) pxVel = (e.clientX - lastX) / (now - lastT);
+      lastX = e.clientX; lastT = now;
+    });
+    const endDrag = () => {
+      if (!dragging) return;
+      dragging = false;
+      stage.classList.remove("is-drag");
+      // momentum: fling in the direction of release, clamped to 3 cards
+      const fling = (rtl() ? 1 : -1) * -pxVel * 9 / (spacing() / 100);
+      target = Math.round(pos + Math.max(-3, Math.min(3, fling)));
+      kick();
+      // this gesture's click fires before the timeout, so it still sees
+      // moved=true; later (e.g. keyboard-activated) clicks are not eaten
+      setTimeout(() => { moved = false; }, 0);
+    };
+    stage.addEventListener("pointerup", endDrag);
+    stage.addEventListener("pointercancel", endDrag);
+
+    /* wheel / trackpad: both axes scrub; snap after the gesture rests */
+    let wheelTimer;
+    stage.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      if (flyModal && !flyModal.hidden) return;
+      const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      pos += (rtl() ? -1 : 1) * d * 0.0032;
+      target = pos; vel = 0;
+      render();
+      clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(() => goTo(Math.round(pos)), 130);
+    }, { passive: false });
+
+    /* keyboard */
+    addEventListener("keydown", (e) => {
+      if (flyModal && !flyModal.hidden) return;
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      const step = (e.key === "ArrowRight" ? 1 : -1) * (rtl() ? -1 : 1);
+      goTo(Math.round(target) + step);
+    });
+
+    /* ---------- full-screen player with a shared-element FLIP ---------- */
+    let ytApi = null, player = null, openCard = null;
+    const loadYT = () =>
+      ytApi ||= new Promise((res, rej) => {
+        if (window.YT?.Player) return res(window.YT);
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        window.onYouTubeIframeAPIReady = () => res(window.YT);
+        tag.onerror = () => { ytApi = null; rej(new Error("yt api blocked")); };
+        setTimeout(() => { ytApi = null; rej(new Error("yt api timeout")); }, 3500);
+        document.head.appendChild(tag);
+      });
+
+    const modalRect = (aspect) => {
+      const vw = innerWidth, vh = innerHeight;
+      const ar = aspect === "wide" ? 16 / 9 : 9 / 16;
+      let w = Math.min(vw * 0.92, vh * 0.88 * ar);
+      let h = w / ar;
+      return { left: (vw - w) / 2, top: (vh - h) / 2, width: w, height: h };
+    };
+
+    const openModal = (card) => {
+      if (!flyModal || openCard) return;
+      openCard = card;
+      const from = card.getBoundingClientRect();
+      const to = modalRect(card.dataset.aspect);
+      flyPoster.src = card.querySelector("img").src;
+      Object.assign(flyBox.style, {
+        left: `${to.left}px`, top: `${to.top}px`,
+        width: `${to.width}px`, height: `${to.height}px`,
+        transform: reduceMotion ? "none" : `translate(${from.left - to.left}px, ${from.top - to.top}px) ` +
+          `scale(${from.width / to.width}, ${from.height / to.height})`,
+      });
+      flyModal.hidden = false;
+      document.body.style.overflow = "hidden";
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        flyModal.classList.add("is-in");
+        flyBox.style.transform = "none";
+      }));
+      // the click that opened the modal is the user gesture: sound allowed
+      loadYT().then((YT) => {
+        if (!openCard) return;
+        const host = document.createElement("div");
+        flyPlayerHost.replaceChildren(host);
+        player = new YT.Player(host, {
+          videoId: card.dataset.video,
+          playerVars: { autoplay: 1, playsinline: 1, rel: 0 },
+          events: {
+            // 0 = ended: close and let the gallery loop onward
+            onStateChange: (ev) => { if (ev.data === 0) closeModal(); },
+          },
+        });
+      }).catch(() => {
+        // API unreachable: plain embed still plays, without auto-close
+        if (!openCard) return;
+        const f = document.createElement("iframe");
+        f.src = `https://www.youtube.com/embed/${card.dataset.video}?autoplay=1&playsinline=1&rel=0`;
+        f.allow = "autoplay; encrypted-media; picture-in-picture";
+        f.allowFullscreen = true;
+        flyPlayerHost.replaceChildren(f);
+      });
+    };
+
+    const closeModal = () => {
+      if (!flyModal || !openCard) return;
+      const card = openCard;
+      openCard = null;
+      try { player?.destroy(); } catch (e) {}
+      player = null;
+      flyPlayerHost.replaceChildren();
+      flyModal.classList.remove("is-in");
+      const from = card.getBoundingClientRect();
+      const to = flyBox.getBoundingClientRect();
+      flyBox.style.transform = reduceMotion ? "none" :
+        `translate(${from.left - to.left}px, ${from.top - to.top}px) ` +
+        `scale(${from.width / to.width}, ${from.height / to.height})`;
+      document.body.style.overflow = "";
+      setTimeout(() => { flyModal.hidden = true; flyPoster.src = ""; }, reduceMotion ? 0 : 560);
+    };
+
+    stage.addEventListener("click", (e) => {
+      if (moved) return;                         // a drag, not a click
+      const card = e.target.closest(".fly__card");
+      if (!card) return;
+      const view = e.target.closest(".fly__view");
+      if (!card.classList.contains("is-center") && !view) {
+        // side card: bring it to the lens first
+        let o = flyCards.indexOf(card) - pos;
+        o = ((o % N) + N) % N;
+        if (o > N / 2) o -= N;
+        goTo(Math.round(pos + o));
+        return;
+      }
+      openModal(card);
+    });
+    document.getElementById("flyClose")?.addEventListener("click", closeModal);
+    document.getElementById("flyBackdrop")?.addEventListener("click", closeModal);
+    addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+    addEventListener("resize", render);
+    render();
+  }
+
 })();
