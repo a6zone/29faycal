@@ -39,8 +39,8 @@
       desc2: "A full promotional video for a Starbucks branch, featuring a limited-time discount offer on their signature coffee cup.",
       desc3: "Filmed the experience and presented everything on camera in a casual style, sharing an honest recommendation.",
       footL1: "Let's", footL2: "talk.",
-      footSub: "Have a project in mind? Send a message, or browse everything in one place.",
-      footBottom: "© 2026 by FAYCAL · CUT ON DAVINCI RESOLVE"
+      footSub: "Got an idea? Let’s turn it into content worth watching",
+      footBottom: "© 2026 Crafted by Faycal"
     },
     ar: {
       navAbout: "نبذة", navSkills: "المهارات", navWork: "الأعمال", navContact: "تواصل", navCta: "ملفاتي",
@@ -67,8 +67,8 @@
       desc2: "فيديو ترويجي كامل لفرع ستاربكس، يعرض خصماً لفترة محدودة على كوب قهوتهم المميز.",
       desc3: "صوّرت التجربة وقدّمت كل شيء أمام الكاميرا بأسلوب عفوي، مع توصية صادقة.",
       footL1: "لنتحدث", footL2: "معاً.",
-      footSub: "عندك مشروع في بالك؟ أرسل رسالة، أو تصفّح كل شيء في مكان واحد.",
-      footBottom: "© 2026 فيصل · مونتاج على DAVINCI RESOLVE"
+      footSub: "عندك فكرة؟ خلّني أحوّلها إلى محتوى يستحق المشاهدة",
+      footBottom: "© 2026 من إبداع فيصل "
     },
     fr: {
       navAbout: "À propos", navSkills: "Compétences", navWork: "Projets", navContact: "Contact", navCta: "Mon Drive",
@@ -95,8 +95,8 @@
       desc2: "Une vidéo promotionnelle complète pour une succursale Starbucks, avec une offre de réduction à durée limitée sur leur gobelet signature.",
       desc3: "J'ai filmé l'expérience et tout présenté face caméra, dans un style décontracté, avec un avis honnête.",
       footL1: "Discutons", footL2: "ensemble.",
-      footSub: "Un projet en tête ? Envoyez un message, ou parcourez tout au même endroit.",
-      footBottom: "© 2026 FAYCAL · MONTÉ SUR DAVINCI RESOLVE"
+      footSub: "Une idée en tête ? Transformons-la en un contenu qui marque les esprits",
+      footBottom: "© 2026 Créé par Fayçal"
     }
   };
 
