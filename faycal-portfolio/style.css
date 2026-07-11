@@ -633,7 +633,11 @@ section, .footer {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
+  /* the cam is a plane at z=0: without this it swallows clicks meant
+     for any card resting a hair behind that plane */
+  pointer-events: none;
 }
+.fly__card { pointer-events: auto; }
 .fly__card {
   position: absolute;
   top: 50%; left: 50%;
@@ -670,7 +674,14 @@ section, .footer {
   object-fit: cover;
   pointer-events: none;
 }
-.fly__card:not(.is-center) { cursor: pointer; }
+.fly__card { cursor: pointer; }
+/* during a drag the hover lift and bob would fight the tracking
+   transform and read as jitter — freeze them */
+.fly__stage.is-drag .fly__card-in {
+  transition: none;
+  translate: 0 0;
+  animation-play-state: paused;
+}
 .fly__glass {
   position: absolute;
   inset-inline: 10px;

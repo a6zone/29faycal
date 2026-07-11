@@ -325,11 +325,13 @@
 
   /* ---------- flying cards: cover-flow project gallery ----------
      A continuous position `pos` (in card units) places every card on a
-     3D arc: translate3d + rotateY + scale, all GPU-composited. Drag,
-     wheel, swipe, and arrow keys write to the same spring that settles
-     on whole numbers so one card is always centered. */
+     3D arc: translate3d + rotateY + scale, all GPU-composited. The four
+     projects are doubled into a ring of eight so both sides always look
+     endless. Dragging lerps toward the pointer for weight; releasing
+     coasts on momentum with friction, then settles softly on a card.
+     Clicking any visible card opens it. */
   const stage = document.getElementById("flyStage");
-  const flyCards = stage ? [...stage.querySelectorAll(".fly__card")] : [];
+  const flyCam = document.getElementById("flyCam");
   const flyDescs = [...document.querySelectorAll(".fly__desc")];
   const flyIdx = document.getElementById("flyIdx");
   const flyModal = document.getElementById("flyModal");
@@ -337,14 +339,25 @@
   const flyPoster = document.getElementById("flyPoster");
   const flyPlayerHost = document.getElementById("flyPlayer");
 
-  if (stage && flyCards.length) {
+  if (stage && flyCam) {
+    const originals = [...flyCam.querySelectorAll(".fly__card")];
+    const COUNT = originals.length;
+    // double the deck: the ring never shows an empty side
+    originals.forEach((c, i) => {
+      const d = c.cloneNode(true);
+      d.setAttribute("aria-hidden", "true");
+      d.style.setProperty("--i", String(i + COUNT));
+      d.querySelectorAll("button").forEach((b) => { b.tabIndex = -1; });
+      flyCam.appendChild(d);
+    });
+    const flyCards = [...flyCam.querySelectorAll(".fly__card")];
     const N = flyCards.length;
     const rtl = () => document.documentElement.dir === "rtl";
-    let pos = 0, vel = 0, target = 0, raf = null, dragging = false;
+    let pos = 0, vel = 0, dragPos = 0, snapT = 0;
+    let raf = null, dragging = false, moved = false;
     let shownIdx = -1;
 
     const spacing = () => flyCards[0].offsetWidth * 0.78;
-    const wrapIdx = (v) => ((Math.round(v) % N) + N) % N;
 
     const render = () => {
       const sp = spacing();
@@ -354,16 +367,17 @@
         o = ((o % N) + N) % N;
         if (o > N / 2) o -= N;                      // nearest wrap: -N/2..N/2
         const x = dir * o * sp;
-        const z = -Math.abs(o) * 190;
+        // the centered card floats toward the lens; neighbours recede
+        const z = (1 - Math.min(Math.abs(o), 1)) * 60 - Math.abs(o) * 170;
         const ry = dir * Math.max(-1, Math.min(1, o)) * -26;
-        const sc = Math.max(0.7, 1 - Math.abs(o) * 0.13);
+        const sc = Math.max(0.62, 1 - Math.abs(o) * 0.11);
         card.style.transform =
           `translate(-50%, -50%) translate3d(${x}px, 0, ${z}px) rotateY(${ry}deg) scale(${sc})`;
-        card.style.opacity = String(Math.max(0, 1 - Math.max(0, Math.abs(o) - 1.1) * 0.75));
+        card.style.opacity = String(Math.max(0, 1 - Math.max(0, Math.abs(o) - 1.6) * 0.42));
         card.style.zIndex = String(100 - Math.round(Math.abs(o) * 10));
         card.classList.toggle("is-center", Math.abs(o) < 0.5);
       });
-      const idx = wrapIdx(pos);
+      const idx = ((Math.round(pos) % N) + N) % N % COUNT;
       if (idx !== shownIdx) {
         shownIdx = idx;
         if (flyIdx) flyIdx.textContent = String(idx + 1).padStart(2, "0");
@@ -372,72 +386,87 @@
     };
 
     const tick = () => {
-      if (dragging) { render(); raf = requestAnimationFrame(tick); return; }
-      const dist = target - pos;
-      vel += dist * 0.085;   // spring stiffness
-      vel *= 0.8;            // damping
-      pos += vel;
-      if (Math.abs(dist) < 0.001 && Math.abs(vel) < 0.001) {
-        pos = target;
+      if (dragging) {
+        // weighty follow: the deck eases after the pointer
+        const prev = pos;
+        pos += (dragPos - pos) * 0.3;
+        vel = pos - prev;
         render();
-        raf = null;
+        raf = requestAnimationFrame(tick);
         return;
+      }
+      if (snapT === null) {
+        // free coasting with friction — no hard snap
+        pos += vel;
+        vel *= 0.94;
+        if (Math.abs(vel) < 0.006) snapT = Math.round(pos);
+      } else {
+        // soft magnetic settle onto the nearest card
+        const dist = snapT - pos;
+        vel += dist * 0.05;
+        vel *= 0.84;
+        pos += vel;
+        if (Math.abs(dist) < 0.002 && Math.abs(vel) < 0.002) {
+          pos = snapT; vel = 0; render(); raf = null; return;
+        }
       }
       render();
       raf = requestAnimationFrame(tick);
     };
     const kick = () => {
-      if (reduceMotion) { pos = target; vel = 0; render(); return; }
+      if (reduceMotion) { pos = snapT ?? Math.round(pos); vel = 0; render(); return; }
       if (!raf) raf = requestAnimationFrame(tick);
     };
-    const goTo = (t) => { target = t; kick(); };
+    const goTo = (t) => { snapT = t; kick(); };
 
-    /* drag: pointer events cover mouse, touch, and pen */
-    let startX = 0, startPos = 0, lastX = 0, lastT = 0, pxVel = 0, moved = false;
+    /* drag: pointer events cover mouse, touch, and pen. The pointer is
+       only captured once a real drag starts — capturing on pointerdown
+       would retarget the click to the stage and kill card clicks. */
+    let startX = 0, startPos = 0, pointerId = null;
     stage.addEventListener("pointerdown", (e) => {
       if (e.button) return;
       dragging = true; moved = false;
-      startX = lastX = e.clientX; startPos = pos;
-      lastT = performance.now(); pxVel = 0;
-      stage.setPointerCapture(e.pointerId);
-      stage.classList.add("is-drag");
+      pointerId = e.pointerId;
+      startX = e.clientX; startPos = dragPos = pos;
+      snapT = null; vel = 0;
       kick();
     });
     stage.addEventListener("pointermove", (e) => {
       if (!dragging) return;
       const dx = e.clientX - startX;
-      if (Math.abs(dx) > 6) moved = true;
-      pos = startPos + (rtl() ? 1 : -1) * dx / spacing();
-      const now = performance.now();
-      if (now > lastT) pxVel = (e.clientX - lastX) / (now - lastT);
-      lastX = e.clientX; lastT = now;
+      if (!moved && Math.abs(dx) > 7) {
+        moved = true;
+        stage.classList.add("is-drag");
+        try { stage.setPointerCapture(pointerId); } catch (err) {}
+      }
+      if (moved) dragPos = startPos + (rtl() ? 1 : -1) * -dx / spacing();
     });
     const endDrag = () => {
       if (!dragging) return;
       dragging = false;
       stage.classList.remove("is-drag");
-      // momentum: fling in the direction of release, clamped to 3 cards
-      const fling = (rtl() ? 1 : -1) * -pxVel * 9 / (spacing() / 100);
-      target = Math.round(pos + Math.max(-3, Math.min(3, fling)));
+      // momentum carries — capped so a flick coasts about two cards
+      vel = Math.max(-0.14, Math.min(0.14, vel));
+      snapT = Math.abs(vel) < 0.006 ? Math.round(pos) : null;
       kick();
       // this gesture's click fires before the timeout, so it still sees
-      // moved=true; later (e.g. keyboard-activated) clicks are not eaten
+      // moved=true; later clicks are not eaten
       setTimeout(() => { moved = false; }, 0);
     };
     stage.addEventListener("pointerup", endDrag);
     stage.addEventListener("pointercancel", endDrag);
 
-    /* wheel / trackpad: both axes scrub; snap after the gesture rests */
+    /* wheel / trackpad: both axes scrub; settle after the gesture rests */
     let wheelTimer;
     stage.addEventListener("wheel", (e) => {
       e.preventDefault();
       if (flyModal && !flyModal.hidden) return;
       const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      pos += (rtl() ? -1 : 1) * d * 0.0032;
-      target = pos; vel = 0;
+      pos += (rtl() ? -1 : 1) * d * 0.0028;
+      snapT = null; vel = 0;
       render();
       clearTimeout(wheelTimer);
-      wheelTimer = setTimeout(() => goTo(Math.round(pos)), 130);
+      wheelTimer = setTimeout(() => goTo(Math.round(pos)), 150);
     }, { passive: false });
 
     /* keyboard */
@@ -445,7 +474,7 @@
       if (flyModal && !flyModal.hidden) return;
       if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
       const step = (e.key === "ArrowRight" ? 1 : -1) * (rtl() ? -1 : 1);
-      goTo(Math.round(target) + step);
+      goTo(Math.round(snapT ?? pos) + step);
     });
 
     /* ---------- full-screen player with a shared-element FLIP ---------- */
@@ -464,8 +493,8 @@
     const modalRect = (aspect) => {
       const vw = innerWidth, vh = innerHeight;
       const ar = aspect === "wide" ? 16 / 9 : 9 / 16;
-      let w = Math.min(vw * 0.92, vh * 0.88 * ar);
-      let h = w / ar;
+      const w = Math.min(vw * 0.92, vh * 0.88 * ar);
+      const h = w / ar;
       return { left: (vw - w) / 2, top: (vh - h) / 2, width: w, height: h };
     };
 
@@ -528,19 +557,16 @@
       setTimeout(() => { flyModal.hidden = true; flyPoster.src = ""; }, reduceMotion ? 0 : 560);
     };
 
+    /* any visible card opens directly — no need to center it first */
     stage.addEventListener("click", (e) => {
       if (moved) return;                         // a drag, not a click
       const card = e.target.closest(".fly__card");
       if (!card) return;
-      const view = e.target.closest(".fly__view");
-      if (!card.classList.contains("is-center") && !view) {
-        // side card: bring it to the lens first
-        let o = flyCards.indexOf(card) - pos;
-        o = ((o % N) + N) % N;
-        if (o > N / 2) o -= N;
-        goTo(Math.round(pos + o));
-        return;
-      }
+      // ease the deck toward the chosen card behind the player
+      let o = flyCards.indexOf(card) - pos;
+      o = ((o % N) + N) % N;
+      if (o > N / 2) o -= N;
+      if (Math.abs(o) >= 0.5) goTo(Math.round(pos + o));
       openModal(card);
     });
     document.getElementById("flyClose")?.addEventListener("click", closeModal);
