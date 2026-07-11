@@ -439,7 +439,9 @@
         stage.classList.add("is-drag");
         try { stage.setPointerCapture(pointerId); } catch (err) {}
       }
-      if (moved) dragPos = startPos + (rtl() ? 1 : -1) * -dx / spacing();
+      // grab semantics: the deck follows the hand, so dragging right
+      // brings the cards on the left toward center
+      if (moved) dragPos = startPos + (rtl() ? 1 : -1) * dx / spacing();
     });
     const endDrag = () => {
       if (!dragging) return;
