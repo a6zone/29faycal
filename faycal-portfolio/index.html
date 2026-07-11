@@ -8,13 +8,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="icon" type="image/png" href="assets/logo-mark.png?v=20260711b">
+<link rel="icon" type="image/png" href="assets/logo-mark.png?v=20260711c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Lateef:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script>/* set theme before first paint to avoid a flash */
 try{var t=localStorage.getItem("faycal-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="stylesheet" href="style.css?v=20260711b">
+<link rel="stylesheet" href="style.css?v=20260711c">
 </head>
 <body>
 
@@ -39,10 +39,10 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
 </div>
 
 <!-- Nav: Dynamic Island — collapsed pill (name + Drive), tap to expand -->
-<nav class="nav" id="nav">
+<nav class="nav nav--intro" id="nav">
   <div class="nav__bar">
     <button class="nav__brand" id="islandToggle" type="button" aria-expanded="false" aria-controls="islandPanel" aria-label="Menu">
-      <img src="assets/wordmark.png" alt="FAYCAL">
+      <span class="nav__logo" aria-hidden="true"></span>
       <span class="nav__chev" aria-hidden="true"></span>
     </button>
     <a class="nav__cta" data-i18n="navCta" href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">My Drive</a>
@@ -96,7 +96,7 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
 
     <div class="hero__meta">
       <p class="hero__copy">©2026</p>
-      <p class="hero__sub mono" data-i18n="heroSub">FAYÇAL · BORN NOVEMBER 1998</p>
+      <img class="hero__logo" src="assets/logo-mark.png" alt="Fayçal logo">
     </div>
   </section>
 
@@ -239,6 +239,6 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
 
 </main>
 
-<script src="script.js?v=20260711b"></script>
+<script src="script.js?v=20260711c"></script>
 </body>
 </html>

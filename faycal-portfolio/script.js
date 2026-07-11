@@ -17,7 +17,6 @@
     en: {
       navAbout: "About", navSkills: "Skills", navWork: "Work", navContact: "Contact", navCta: "My Drive",
       heroL1: "VIDEO", heroL2: "EDITOR",
-      heroSub: "FAYÇAL · BORN NOVEMBER 1998",
       flipRole: "VIDEO EDITOR 🎥",
       eyeAbout: "ABOUT", eyeSkills: "SKILLS", eyeFeatured: "FEATURED PROJECTS", eyeWork: "SELECTED WORK", eyeContact: "CONTACT",
       hello: "Hello!",
@@ -46,7 +45,6 @@
     ar: {
       navAbout: "نبذة", navSkills: "المهارات", navWork: "الأعمال", navContact: "تواصل", navCta: "ملفاتي",
       heroL1: "صانع", heroL2: "أفلام إعلانية",
-      heroSub: "فيصل · من مواليد نوفمبر 1998",
       flipRole: "صانع أفلام 🎥",
       eyeAbout: "نبذة", eyeSkills: "المهارات", eyeFeatured: "مشاريع مميزة", eyeWork: "أعمال مختارة", eyeContact: "تواصل",
       hello: "مرحباً!",
@@ -75,7 +73,6 @@
     fr: {
       navAbout: "À propos", navSkills: "Compétences", navWork: "Projets", navContact: "Contact", navCta: "Mon Drive",
       heroL1: "MONTEUR", heroL2: "VIDÉO",
-      heroSub: "FAYÇAL · NÉ EN NOVEMBRE 1998",
       flipRole: "MONTEUR VIDÉO 🎥",
       eyeAbout: "À PROPOS", eyeSkills: "COMPÉTENCES", eyeFeatured: "PROJETS PHARES", eyeWork: "TRAVAUX CHOISIS", eyeContact: "CONTACT",
       hello: "Bonjour !",
@@ -265,9 +262,21 @@
   /* ---------- Dynamic Island nav ---------- */
   const nav = document.getElementById("nav");
   const islandToggle = document.getElementById("islandToggle");
+  let islandTimer;
   const setIsland = (open) => {
+    if (!nav || open === nav.classList.contains("is-open")) return;
+    // the entrance drop must never replay on toggle
+    nav.classList.remove("nav--intro");
     nav.classList.toggle("is-open", open);
+    if (!open) {
+      // closing gets its own settle animation instead of re-entering
+      nav.classList.add("is-closing");
+      setTimeout(() => nav.classList.remove("is-closing"), 550);
+    }
     islandToggle.setAttribute("aria-expanded", String(open));
+    clearTimeout(islandTimer);
+    // left open untouched: snap back to the pill after 7s
+    if (open) islandTimer = setTimeout(() => setIsland(false), 7000);
   };
   islandToggle?.addEventListener("click", () => setIsland(!nav.classList.contains("is-open")));
   // a chosen destination collapses the island again
@@ -279,6 +288,10 @@
     if (nav && !nav.contains(e.target) && nav.classList.contains("is-open")) setIsland(false);
   });
   addEventListener("keydown", (e) => { if (e.key === "Escape") setIsland(false); });
+  // any scroll collapses it
+  addEventListener("scroll", () => {
+    if (nav?.classList.contains("is-open")) setIsland(false);
+  }, { passive: true });
 
   /* ---------- theme toggle ---------- */
   const themeBtn = document.getElementById("themeToggle");
