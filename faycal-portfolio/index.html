@@ -8,13 +8,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<link rel="icon" type="image/png" href="assets/logo-mark.png?v=20260711">
+<link rel="icon" type="image/png" href="assets/logo-mark.png?v=20260711b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Lateef:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script>/* set theme before first paint to avoid a flash */
 try{var t=localStorage.getItem("faycal-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="stylesheet" href="style.css?v=20260711">
+<link rel="stylesheet" href="style.css?v=20260711b">
 </head>
 <body>
 
@@ -38,22 +38,33 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
   <div class="playhead__tc" id="playheadTc">00:00:00</div>
 </div>
 
-<!-- Nav -->
+<!-- Nav: Dynamic Island — collapsed pill (name + Drive), tap to expand -->
 <nav class="nav" id="nav">
-  <a class="nav__brand" href="#hero"><img src="assets/wordmark.png" alt="FAYCAL"></a>
-  <div class="nav__links">
-    <a class="roll" data-split data-i18n="navAbout" href="#about">About</a>
-    <a class="roll" data-split data-i18n="navSkills" href="#skills">Skills</a>
-    <a class="roll" data-split data-i18n="navWork" href="#work">Work</a>
-    <a class="roll" data-split data-i18n="navContact" href="#contact">Contact</a>
+  <div class="nav__bar">
+    <button class="nav__brand" id="islandToggle" type="button" aria-expanded="false" aria-controls="islandPanel" aria-label="Menu">
+      <img src="assets/wordmark.png" alt="FAYCAL">
+      <span class="nav__chev" aria-hidden="true"></span>
+    </button>
+    <a class="nav__cta" data-i18n="navCta" href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">My Drive</a>
   </div>
-  <div class="nav__lang" id="langSwitch" role="group" aria-label="Language">
-    <button type="button" data-lang="en" class="is-active">EN</button>
-    <button type="button" data-lang="ar" lang="ar">ع</button>
-    <button type="button" data-lang="fr">FR</button>
+  <div class="nav__panel" id="islandPanel">
+    <div class="nav__panel-in">
+      <div class="nav__links">
+        <a class="roll" data-split data-i18n="navAbout" href="#about">About</a>
+        <a class="roll" data-split data-i18n="navSkills" href="#skills">Skills</a>
+        <a class="roll" data-split data-i18n="navWork" href="#work">Work</a>
+        <a class="roll" data-split data-i18n="navContact" href="#contact">Contact</a>
+      </div>
+      <div class="nav__tools">
+        <div class="nav__lang" id="langSwitch" role="group" aria-label="Language">
+          <button type="button" data-lang="en" class="is-active">EN</button>
+          <button type="button" data-lang="ar" lang="ar">ع</button>
+          <button type="button" data-lang="fr">FR</button>
+        </div>
+        <button class="nav__theme" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+      </div>
+    </div>
   </div>
-  <button class="nav__theme" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
-  <a class="nav__cta" data-i18n="navCta" href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">My Drive ↗</a>
 </nav>
 
 <main>
@@ -85,7 +96,7 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
 
     <div class="hero__meta">
       <p class="hero__copy">©2026</p>
-      <p class="hero__sub mono" data-i18n="heroSub">FAYÇAL — BORN NOVEMBER 1998</p>
+      <p class="hero__sub mono" data-i18n="heroSub">FAYÇAL · BORN NOVEMBER 1998</p>
     </div>
   </section>
 
@@ -95,14 +106,14 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
     <div class="about__grid">
       <div class="about__left">
         <h2 class="about__hello reveal" data-i18n="hello">Hello!</h2>
-        <p class="about__tag reveal" style="--i:1" data-i18n="aboutTag">I'm Fayçal —<br>Video Editor 🎥</p>
+        <p class="about__tag reveal" style="--i:1" data-i18n="aboutTag">I'm Fayçal,<br>Video Editor 🎥</p>
       </div>
       <div class="about__right">
-        <p class="reveal" style="--i:1" data-i18n="aboutP1">I'm a video editor born in November 1998, offering creative and administrative support — from brainstorming ideas and content creation to keeping every project organized and on schedule.</p>
+        <p class="reveal" style="--i:1" data-i18n="aboutP1">I'm a video editor born in November 1998, offering creative and administrative support, from brainstorming ideas and content creation to keeping every project organized and on schedule.</p>
         <p class="reveal" style="--i:2" data-i18n="aboutP2">I cut everything in DaVinci Resolve, and all of my work lives in one open folder for you to browse.</p>
         <div class="about__cta reveal" style="--i:3">
-          <a class="btn btn--dark" data-i18n="btnDrive" href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">My Google Drive ↗</a>
-          <a class="btn btn--ghost" data-i18n="btnShorts" href="#work">Watch my shorts ↓</a>
+          <a class="btn btn--dark" data-i18n="btnDrive" href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">My Google Drive</a>
+          <a class="btn btn--ghost" data-i18n="btnShorts" href="#work">Watch my shorts</a>
         </div>
       </div>
     </div>
@@ -110,7 +121,7 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
 
   <!-- Statement: scrubbed word by word, like footage under a playhead -->
   <section class="statement" id="statement">
-    <p class="statement__text" id="statementText" data-i18n="statement">From brainstorming ideas to the final cut — I turn creative thinking into content that looks good, reads well, and stays organized.</p>
+    <p class="statement__text" id="statementText" data-i18n="statement">From brainstorming ideas to the final cut, I turn creative thinking into content that looks good, reads well, and stays organized.</p>
   </section>
 
   <!-- Skills -->
@@ -123,11 +134,11 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
         <p class="skills__tags" data-i18n="tagsCreative">Brainstorming ideas <i>•</i> Content creation (writing, editing) <i>•</i> Maintaining a visually appealing space</p>
       </li>
       <li class="skills__row reveal" style="--i:1">
-        <h3 data-i18n="skillAdmin">Administrative</h3>
+        <h3 data-i18n="skillAdmin">Production</h3>
         <p class="skills__tags" data-i18n="tagsAdmin">Organization (scheduling, filing) <i>•</i> Communication (written &amp; verbal) <i>•</i> Office software (email, project management)</p>
       </li>
       <li class="skills__row reveal" style="--i:2">
-        <h3 data-i18n="skillTransfer">Transferable</h3>
+        <h3 data-i18n="skillTransfer">Workflow</h3>
         <p class="skills__tags" data-i18n="tagsTransfer">Problem-solving <i>•</i> Time management <i>•</i> Interpersonal skills</p>
       </li>
       <li class="skills__row skills__row--tool reveal" style="--i:3">
@@ -151,9 +162,9 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
       <div class="card__body card__body--wide">
         <div>
           <p class="card__kind mono" data-i18n="featKind">FILM · 16:9</p>
-          <h3>Laysen Valley — ليسن فالي</h3>
+          <h3>Laysen Valley · ليسن فالي</h3>
         </div>
-        <p class="card__desc" data-i18n="featDesc">A full-length film shot and edited by Fayçal — best watched full-screen.</p>
+        <p class="card__desc" data-i18n="featDesc">A full-length film shot and edited by Fayçal, best watched full-screen.</p>
       </div>
     </article>
   </section>
@@ -163,7 +174,7 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
     <p class="eyebrow mono reveal" data-tc data-i18n="eyeWork">SELECTED WORK</p>
     <div class="work__head">
       <h2 class="section-title"><span class="mask"><span class="mask__inner" data-i18n="workL1">Some of my</span></span> <span class="mask mask--2"><span class="mask__inner" data-i18n="workL2">projects</span></span></h2>
-      <a class="btn btn--ghost reveal" data-i18n="viewChannel" href="https://www.youtube.com/channel/UCsKF6fm_veNIZ4c--Bxx7MQ" target="_blank" rel="noopener">View channel ↗</a>
+      <a class="btn btn--ghost reveal" data-i18n="viewChannel" href="https://www.youtube.com/channel/UCsKF6fm_veNIZ4c--Bxx7MQ" target="_blank" rel="noopener">View channel</a>
     </div>
 
     <div class="work__grid">
@@ -216,18 +227,18 @@ try{if(localStorage.getItem("faycal-lang"))document.getElementById("langGate").r
     <a class="footer__mail roll" data-split href="mailto:29Faycal@gmail.com">29Faycal@gmail.com</a>
 
     <div class="footer__links reveal">
-      <a class="roll" data-split href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">Google Drive ↗</a>
-      <a class="roll" data-split href="https://www.youtube.com/channel/UCsKF6fm_veNIZ4c--Bxx7MQ" target="_blank" rel="noopener">YouTube ↗</a>
+      <a class="roll" data-split href="https://drive.google.com/drive/folders/1ZTCWJykmPmFEGz77v1I5ImJOwgNOcXVk?usp=sharing" target="_blank" rel="noopener">Google Drive</a>
+      <a class="roll" data-split href="https://www.youtube.com/channel/UCsKF6fm_veNIZ4c--Bxx7MQ" target="_blank" rel="noopener">YouTube</a>
     </div>
 
     <div class="footer__bottom">
       <img class="footer__wordmark" src="assets/wordmark.png" alt="FAYCAL">
-      <p class="mono" data-i18n="footBottom">© 2026 by FAYCAL — CUT ON DAVINCI RESOLVE</p>
+      <p class="mono" data-i18n="footBottom">© 2026 by FAYCAL · CUT ON DAVINCI RESOLVE</p>
     </div>
   </footer>
 
 </main>
 
-<script src="script.js?v=20260711"></script>
+<script src="script.js?v=20260711b"></script>
 </body>
 </html>

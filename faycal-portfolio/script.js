@@ -15,25 +15,25 @@
 
   const I18N = {
     en: {
-      navAbout: "About", navSkills: "Skills", navWork: "Work", navContact: "Contact", navCta: "My Drive ↗",
+      navAbout: "About", navSkills: "Skills", navWork: "Work", navContact: "Contact", navCta: "My Drive",
       heroL1: "VIDEO", heroL2: "EDITOR",
-      heroSub: "FAYÇAL — BORN NOVEMBER 1998",
+      heroSub: "FAYÇAL · BORN NOVEMBER 1998",
       flipRole: "VIDEO EDITOR 🎥",
       eyeAbout: "ABOUT", eyeSkills: "SKILLS", eyeFeatured: "FEATURED PROJECTS", eyeWork: "SELECTED WORK", eyeContact: "CONTACT",
       hello: "Hello!",
-      aboutTag: "I'm Fayçal —<br>Video Editor 🎥",
-      aboutP1: "I'm a video editor born in November 1998, offering creative and administrative support — from brainstorming ideas and content creation to keeping every project organized and on schedule.",
+      aboutTag: "I'm Fayçal,<br>Video Editor 🎥",
+      aboutP1: "I'm a video editor born in November 1998, offering creative and administrative support, from brainstorming ideas and content creation to keeping every project organized and on schedule.",
       aboutP2: "I cut everything in DaVinci Resolve, and all of my work lives in one open folder for you to browse.",
-      btnDrive: "My Google Drive ↗", btnShorts: "Watch my shorts ↓",
-      statement: "From brainstorming ideas to the final cut — I turn creative thinking into content that looks good, reads well, and stays organized.",
+      btnDrive: "My Google Drive", btnShorts: "Watch my shorts",
+      statement: "From brainstorming ideas to the final cut, I turn creative thinking into content that looks good, reads well, and stays organized.",
       skillsTitle: "Skills",
-      skillCreative: "Creative", skillAdmin: "Administrative", skillTransfer: "Transferable", skillTools: "What I use",
+      skillCreative: "Creative", skillAdmin: "Production", skillTransfer: "Workflow", skillTools: "What I use",
       tagsCreative: "Brainstorming ideas <i>•</i> Content creation (writing, editing) <i>•</i> Maintaining a visually appealing space",
       tagsAdmin: "Organization (scheduling, filing) <i>•</i> Communication (written &amp; verbal) <i>•</i> Office software (email, project management)",
       tagsTransfer: "Problem-solving <i>•</i> Time management <i>•</i> Interpersonal skills",
       featL1: "Featured", featL2: "Projects", featKind: "FILM · 16:9",
-      featDesc: "A full-length film shot and edited by Fayçal — best watched full-screen.",
-      workL1: "Some of my", workL2: "projects", viewChannel: "View channel ↗",
+      featDesc: "A full-length film shot and edited by Fayçal, best watched full-screen.",
+      workL1: "Some of my", workL2: "projects", viewChannel: "View channel",
       kind1: "ART FILM · 9:16", kind2: "COMMERCIAL · 9:16", kind3: "REVIEW · 9:16",
       title2: "Starbucks Promo", title3: "Match Perfume",
       desc1: "A short-form video documenting the full making process of an original art piece called The Orange Helén.",
@@ -41,28 +41,28 @@
       desc3: "Filmed the experience and presented everything on camera in a casual style, sharing an honest recommendation.",
       footL1: "Let's", footL2: "talk.",
       footSub: "Have a project in mind? Send a message, or browse everything in one place.",
-      footBottom: "© 2026 by FAYCAL — CUT ON DAVINCI RESOLVE"
+      footBottom: "© 2026 by FAYCAL · CUT ON DAVINCI RESOLVE"
     },
     ar: {
-      navAbout: "نبذة", navSkills: "المهارات", navWork: "الأعمال", navContact: "تواصل", navCta: "ملفاتي ↗",
+      navAbout: "نبذة", navSkills: "المهارات", navWork: "الأعمال", navContact: "تواصل", navCta: "ملفاتي",
       heroL1: "صانع", heroL2: "أفلام إعلانية",
-      heroSub: "فيصل — من مواليد نوفمبر 1998",
+      heroSub: "فيصل · من مواليد نوفمبر 1998",
       flipRole: "صانع أفلام 🎥",
       eyeAbout: "نبذة", eyeSkills: "المهارات", eyeFeatured: "مشاريع مميزة", eyeWork: "أعمال مختارة", eyeContact: "تواصل",
       hello: "مرحباً!",
-      aboutTag: "أنا فيصل —<br>صانع أفلام 🎥",
-      aboutP1: "أنا محرر فيديو من مواليد نوفمبر 1998، أقدم دعماً إبداعياً وإدارياً — من العصف الذهني وصناعة المحتوى إلى إبقاء كل مشروع منظماً وفي موعده.",
+      aboutTag: "أنا فيصل،<br>صانع أفلام 🎥",
+      aboutP1: "أنا محرر فيديو من مواليد نوفمبر 1998، أقدم دعماً إبداعياً وإدارياً، من العصف الذهني وصناعة المحتوى إلى إبقاء كل مشروع منظماً وفي موعده.",
       aboutP2: "أعمل المونتاج بالكامل على DaVinci Resolve، وكل أعمالي في مجلد واحد مفتوح لتصفّحه.",
-      btnDrive: "ملفاتي على Google Drive ↗", btnShorts: "شاهد مقاطعي ↓",
-      statement: "من العصف الذهني إلى المونتاج النهائي — أحوّل التفكير الإبداعي إلى محتوى جميل الشكل، واضح الرسالة، ومنظم دائماً.",
+      btnDrive: "ملفاتي على Google Drive", btnShorts: "شاهد مقاطعي",
+      statement: "من العصف الذهني إلى المونتاج النهائي، أحوّل التفكير الإبداعي إلى محتوى جميل الشكل، واضح الرسالة، ومنظم دائماً.",
       skillsTitle: "المهارات",
-      skillCreative: "إبداعية", skillAdmin: "إدارية", skillTransfer: "قابلة للنقل", skillTools: "أدواتي",
+      skillCreative: "الإبداعية", skillAdmin: "الإنتاج", skillTransfer: "سير العمل", skillTools: "أدواتي",
       tagsCreative: "العصف الذهني <i>•</i> صناعة المحتوى (كتابة وتحرير) <i>•</i> الحفاظ على مساحة جذابة بصرياً",
       tagsAdmin: "التنظيم (جدولة وأرشفة) <i>•</i> التواصل (كتابي وشفهي) <i>•</i> برامج المكتب (البريد، إدارة المشاريع)",
       tagsTransfer: "حل المشكلات <i>•</i> إدارة الوقت <i>•</i> مهارات التواصل",
       featL1: "مشاريع", featL2: "مميزة", featKind: "فيلم · 16:9",
-      featDesc: "فيلم كامل تصويرُ ومونتاجُ فيصل — يُشاهَد بملء الشاشة.",
-      workL1: "بعض من", workL2: "أعمالي", viewChannel: "قناتي ↗",
+      featDesc: "فيلم كامل تصويرُ ومونتاجُ فيصل، يُشاهَد بملء الشاشة.",
+      workL1: "بعض من", workL2: "أعمالي", viewChannel: "قناتي",
       kind1: "فيلم فني · 9:16", kind2: "إعلان · 9:16", kind3: "مراجعة · 9:16",
       title2: "إعلان ستاربكس", title3: "عطر ماتش",
       desc1: "فيديو قصير يوثّق مراحل صناعة قطعة فنية أصلية بعنوان The Orange Helén.",
@@ -70,28 +70,28 @@
       desc3: "صوّرت التجربة وقدّمت كل شيء أمام الكاميرا بأسلوب عفوي، مع توصية صادقة.",
       footL1: "لنتحدث", footL2: "معاً.",
       footSub: "عندك مشروع في بالك؟ أرسل رسالة، أو تصفّح كل شيء في مكان واحد.",
-      footBottom: "© 2026 فيصل — مونتاج على DAVINCI RESOLVE"
+      footBottom: "© 2026 فيصل · مونتاج على DAVINCI RESOLVE"
     },
     fr: {
-      navAbout: "À propos", navSkills: "Compétences", navWork: "Projets", navContact: "Contact", navCta: "Mon Drive ↗",
+      navAbout: "À propos", navSkills: "Compétences", navWork: "Projets", navContact: "Contact", navCta: "Mon Drive",
       heroL1: "MONTEUR", heroL2: "VIDÉO",
-      heroSub: "FAYÇAL — NÉ EN NOVEMBRE 1998",
+      heroSub: "FAYÇAL · NÉ EN NOVEMBRE 1998",
       flipRole: "MONTEUR VIDÉO 🎥",
       eyeAbout: "À PROPOS", eyeSkills: "COMPÉTENCES", eyeFeatured: "PROJETS PHARES", eyeWork: "TRAVAUX CHOISIS", eyeContact: "CONTACT",
       hello: "Bonjour !",
-      aboutTag: "Je suis Fayçal —<br>monteur vidéo 🎥",
-      aboutP1: "Je suis monteur vidéo, né en novembre 1998. J'offre un soutien créatif et administratif — du brainstorming et de la création de contenu à l'organisation de chaque projet, toujours dans les délais.",
+      aboutTag: "Je suis Fayçal,<br>monteur vidéo 🎥",
+      aboutP1: "Je suis monteur vidéo, né en novembre 1998. J'offre un soutien créatif et administratif, du brainstorming et de la création de contenu à l'organisation de chaque projet, toujours dans les délais.",
       aboutP2: "Je monte tout sur DaVinci Resolve, et l'ensemble de mon travail est réuni dans un dossier ouvert que vous pouvez parcourir.",
-      btnDrive: "Mon Google Drive ↗", btnShorts: "Voir mes vidéos ↓",
-      statement: "Du brainstorming au montage final — je transforme les idées créatives en contenu soigné, clair et bien organisé.",
+      btnDrive: "Mon Google Drive", btnShorts: "Voir mes vidéos",
+      statement: "Du brainstorming au montage final, je transforme les idées créatives en contenu soigné, clair et bien organisé.",
       skillsTitle: "Compétences",
-      skillCreative: "Créatives", skillAdmin: "Administratives", skillTransfer: "Transversales", skillTools: "Mes outils",
+      skillCreative: "Créatif", skillAdmin: "Production", skillTransfer: "Flux de travail", skillTools: "Mes outils",
       tagsCreative: "Brainstorming <i>•</i> Création de contenu (rédaction, édition) <i>•</i> Maintien d'un espace visuellement soigné",
       tagsAdmin: "Organisation (planning, classement) <i>•</i> Communication (écrite et orale) <i>•</i> Logiciels bureautiques (email, gestion de projet)",
       tagsTransfer: "Résolution de problèmes <i>•</i> Gestion du temps <i>•</i> Relationnel",
       featL1: "Projets", featL2: "phares", featKind: "FILM · 16:9",
-      featDesc: "Un film complet tourné et monté par Fayçal — à regarder en plein écran.",
-      workL1: "Quelques-uns de", workL2: "mes projets", viewChannel: "Voir la chaîne ↗",
+      featDesc: "Un film complet tourné et monté par Fayçal, à regarder en plein écran.",
+      workL1: "Quelques-uns de", workL2: "mes projets", viewChannel: "Voir la chaîne",
       kind1: "FILM D'ART · 9:16", kind2: "PUBLICITÉ · 9:16", kind3: "AVIS · 9:16",
       title2: "Promo Starbucks", title3: "Parfum Match",
       desc1: "Une vidéo courte documentant tout le processus de création d'une œuvre originale, The Orange Helén.",
@@ -99,7 +99,7 @@
       desc3: "J'ai filmé l'expérience et tout présenté face caméra, dans un style décontracté, avec un avis honnête.",
       footL1: "Discutons", footL2: "ensemble.",
       footSub: "Un projet en tête ? Envoyez un message, ou parcourez tout au même endroit.",
-      footBottom: "© 2026 FAYCAL — MONTÉ SUR DAVINCI RESOLVE"
+      footBottom: "© 2026 FAYCAL · MONTÉ SUR DAVINCI RESOLVE"
     }
   };
 
@@ -261,6 +261,24 @@
     gate.classList.add("is-done");
     setTimeout(() => gate.remove(), 800);
   });
+
+  /* ---------- Dynamic Island nav ---------- */
+  const nav = document.getElementById("nav");
+  const islandToggle = document.getElementById("islandToggle");
+  const setIsland = (open) => {
+    nav.classList.toggle("is-open", open);
+    islandToggle.setAttribute("aria-expanded", String(open));
+  };
+  islandToggle?.addEventListener("click", () => setIsland(!nav.classList.contains("is-open")));
+  // a chosen destination collapses the island again
+  nav?.querySelectorAll(".nav__links a").forEach((a) =>
+    a.addEventListener("click", () => setIsland(false))
+  );
+  // tapping anywhere outside closes it
+  addEventListener("click", (e) => {
+    if (nav && !nav.contains(e.target) && nav.classList.contains("is-open")) setIsland(false);
+  });
+  addEventListener("keydown", (e) => { if (e.key === "Escape") setIsland(false); });
 
   /* ---------- theme toggle ---------- */
   const themeBtn = document.getElementById("themeToggle");
